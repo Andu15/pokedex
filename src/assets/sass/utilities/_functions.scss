@@ -1,0 +1,22 @@
+/*  retornan valores en el contexto de uso ya sea para una propiedad de estilo, flujo de control o incluso dentro de otra función, esto último muy al enfoque que Javascript plantea con los callbacks */
+
+// @function nombreFuncion (parametro: valor por defecto) {
+//     $nuevoValor: parametro + $otroValor; // Se opera el parámetro según caso
+//     @return $nuevoValor;
+// } 
+
+@function typo($size:normal){
+    @if $size == large {
+        @return 20px;
+    }
+    @if $size == normal {
+        @return 15px;
+    }
+    @if $size == small {
+        @return 10px;
+    }
+}
+
+@function sizeInPixeles($size:15){
+    @return $size + px;
+}
