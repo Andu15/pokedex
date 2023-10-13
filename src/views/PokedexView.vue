@@ -1,6 +1,5 @@
 <template>
   <div class="pokedex">
-    hola
     <div class="pokedex-left">
       <div class="pokedex-left-top">
         <div class="light is-sky is-big in-animated"/>
@@ -51,4 +50,6 @@
         destroyed(){}
     }
 </script>
-<style lang="scss"></style>
+<style lang="scss">
+  @import "@/assets/sass/views/PokedexView.scss";
+</style>

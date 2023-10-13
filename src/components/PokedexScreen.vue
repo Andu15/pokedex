@@ -22,4 +22,6 @@
         destroyed(){}
     }
 </script>
-<style lang="scss"></style>
+<style lang="scss">
+    @import "@/assets/sass/views/_PokedexView.scss";
+</style>
