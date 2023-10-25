@@ -50,6 +50,6 @@
         destroyed(){}
     }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
   @import "@/assets/sass/views/PokedexView.scss";
 </style>
