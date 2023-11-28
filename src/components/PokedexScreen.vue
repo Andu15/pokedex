@@ -1,13 +1,32 @@
 <template>
-    <div class="container"></div>
+    <section class="pokedex-screen">
+        <div v-if="status==='wait'">
+            <p>Por favor, ingresa el nombre de tu pokemón</p>
+            <Pokeball />
+        </div>
+        <div v-else-if="status==='loading'">
+            <img src="" alt="Estamos cargando la información" class="pokedex-no-screen"/>
+        </div>
+        <div v-else-if="status==='error'">
+            <img src="" alt="Hubo un error" class="pokedex-no-screen"/>
+        </div>
+        <div v-else></div>
+    </section>
 </template>
 <script>
+    import Pokeball from '@/components/Pokeball.vue'
+
     export default {
         name: 'PokedexScreen',
         props: {},
-        components: {},
+        components: {
+            Pokeball,
+        },
         data(){
-            return {}
+            return {
+                // error | loading | done | wait
+                status: 'wait'
+            }
         },
         computed: {},
         watch: {},
@@ -22,6 +41,6 @@
         destroyed(){}
     }
 </script>
-<style lang="scss">
-    @import "@/assets/sass/views/_PokedexView.scss";
+<style lang="scss" scoped>
+    @import "@/assets/sass/components/_PokedexScreen.scss";
 </style>

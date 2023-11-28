@@ -160,7 +160,7 @@
   width: inherit;
   border-radius: 10px 0 0 10px;
   border: 1px solid black;
-  border-right: 10px solid black;
+  border-right: 5px solid black;
   box-sizing: border-box;
   padding: 15px 20px;
 }
@@ -183,3 +183,11 @@
   margin-right: .8em;
 }
 
+.pokedex-screen-container {
+  background: map-get($map: $color-text, $key: another);
+  border-radius: 25px;
+  border: 2px solid map-get($map: $color-text, $key: secondary);
+  margin: 20px 10px 40px;
+  height: 50%;
+  padding: .6rem;
+}
