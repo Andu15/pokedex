@@ -35,11 +35,13 @@
           'pokedex-form' : pokedexForm
         },
         data(){
-            return {}
+            return {
+            }
         },
         computed: {},
         watch: {},
-        methods: {},
+        methods: {
+        },
         beforeCreate(){},
         created(){},
         beforeMount(){},

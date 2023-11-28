@@ -6,16 +6,15 @@
   overflow: hidden;
   height: 31rem;
   width: 23rem;
-  margin: 0 auto;
+  // margin: 0 auto;
   overflow: initial;
-  box-shadow: 0 2px 12px -2px map-get($color-base, main);
+  box-shadow: 0 2px 50px -2px map-get($color-base, main);
 }
 .pokedex:hover .pokedex-right-front,
 .pokedex.is-active .pokedex-right-front {
   transform: rotateY(180deg);
 }
-.pokedex:hover .pokedex-right-back,
-.pokedex.is-active .pokedex-right-back {
+.pokedex:hover .pokedex-right-back {
   transform: rotateY(0);
 }
 .pokedex-right-front {
@@ -24,9 +23,9 @@
   width: inherit;
   position: absolute;
   left: 0;
-  right: 0;
+  // right: 0;
   bottom: 0;
-  transition: 1s;
+  transition: 1.2s;
   transform-origin: right center;
   z-index: 2;
   backface-visibility: hidden;
@@ -65,7 +64,7 @@
   transform: rotateY(-180deg);
   right: 0;
   bottom: 0;
-  transition: 1s;
+  transition: 1.2s;
   left: 100%;
   transform-origin: left top;
   z-index: 1;
@@ -97,9 +96,9 @@
   display: block;
   width: 0;
   position: absolute;
-  left: calc(100% - 9rem);
   bottom: 100%;
-  filter: drop-shadow(0 -1px 0 black)
+  left: calc(100% - 9rem);
+  filter: drop-shadow(0 -1px 0 black);
 }
 .light {
   border: 1px solid black;
