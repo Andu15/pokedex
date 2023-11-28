@@ -1,7 +1,6 @@
 <template>
     <section class="pokedex-screen">
-        <div v-if="status==='wait'">
-            <p>Por favor, ingresa el nombre de tu pokemón</p>
+        <div v-if="status==='wait'" style="display:flex; justify-content: center;">
             <Pokeball />
         </div>
         <div v-else-if="status==='loading'">
@@ -10,7 +9,20 @@
         <div v-else-if="status==='error'">
             <img src="" alt="Hubo un error" class="pokedex-no-screen"/>
         </div>
-        <div v-else></div>
+        <div v-else class="pokemon-info" >
+            <!-- <h2 class="pokemon-name">{{pokemon.name}}</h2>
+            <img
+            class="pokemon-img"
+            v-bind:src="pokemon.sprites.front_default"
+            v-bind:alt="pokemon.name" />
+            <ul class="pokemon-stats">
+                <Stat
+                v-bind:item="item"
+                v-for="item in pokemon.stats"
+                v-bind:key="item.stat.name"
+                />
+            </ul> -->
+        </div>
     </section>
 </template>
 <script>

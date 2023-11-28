@@ -1,5 +1,18 @@
 <template>
-    <div class="container"></div>
+    <form class="pokemon-form" @submit="handleSubmit"> 
+        <input
+        class="pokemon-input"
+        type="text"
+        name="pokemon"
+        v-model="pokemonName"
+        placeholder="Busca tu pokemon"
+        autocomplete="off"/>
+        <input
+        type="submit"
+        class="pokemon-btn"
+        value="Ir"
+        />
+    </form>
 </template>
 <script>
     export default {
@@ -7,11 +20,19 @@
         props: {},
         components: {},
         data(){
-            return {}
+            return {
+                pokemonName: ''
+            }
         },
         computed: {},
         watch: {},
-        methods: {},
+        methods: {
+            handleSubmit (e) {
+                e.preventDefault()
+                const pokemonName = this.pokemonName
+
+            }
+        },
         beforeCreate(){},
         created(){},
         beforeMount(){},
@@ -22,4 +43,6 @@
         destroyed(){}
     }
 </script>
-<style lang="scss"></style>
+<style lang="scss" scoped>
+    @import "@/assets/sass/components/_PokedexForm.scss";
+</style>

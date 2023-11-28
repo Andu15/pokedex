@@ -3,10 +3,11 @@
 .pokedex-screen {
   background: map-get($map: $color-text, $key: main);
   border: 2px solid map-get($map: $color-text, $key: secondary);
-  border-radius: 15x;
+  border-radius: 15px;
   height: 100%;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 // .pokemon-info{
 //   padding: 0.8rem;
