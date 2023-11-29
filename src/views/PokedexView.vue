@@ -19,7 +19,10 @@
         <pokedex-form/>
       </div>
     </div>
-    <div class="pokedex-right-front" />
+    <div class="pokedex-right-front" >
+      <div class="pokedex-triangle"></div>
+      <p class="pokedex-bar"></p>
+    </div>
     <div class="pokedex-right-back" />
   </div>
 </template>

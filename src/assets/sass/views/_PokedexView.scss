@@ -19,7 +19,7 @@
 }
 .pokedex-right-front {
   background: map-get($color-base, main);
-  height: calc(100% - 5rem);
+  height: calc(100% - 5.8rem);
   width: inherit;
   position: absolute;
   left: 0;
@@ -54,6 +54,26 @@
   right: calc(100% - 13rem);
   bottom: 100%;
   filter: drop-shadow(0 -7px 0 black);
+}
+.pokedex-triangle {
+  width: 0;
+  height: 0;
+  border-left: 30px solid transparent;
+  border-right: 30px solid transparent;
+  border-bottom: 30px solid map-get($map: $color-action, $key: main);
+  transform: rotate(90deg);
+  position: absolute;
+  left: 0;
+  top: 12rem;
+}
+.pokedex-bar {
+  border-radius: 20px;
+  border: 3px solid map-get($map: $color-base, $key: secondary);
+  width: 70%;
+  height: 20px;
+  position: absolute;
+  bottom: 3rem;
+  margin: 0 44px;
 }
 .pokedex-right-back {
   background: map-get($color-base, main);
@@ -137,35 +157,39 @@
   border-radius: 20px;
 }
 .light.is-red {
-  background-color: map-get($color-base, main);
+  background-color: map-get($color-action, another);
+  box-shadow: inset 0 .5px 0,
+                    0 2.5px 0,
+                    0 4.5px 0;
 }
 .light.is-blue {
   background-color: map-get($color-base, another);
 }
 .light.is-green {
   background-color: map-get($color-action, secondary);
+  box-shadow: inset 0 .5px 0,
+                    0 2.5px 0,
+                    0 4.5px 0;
 }
 .light.is-sky {
-  background-color: map-get($color-base, main);
+  background-color: map-get($color-base, another);
 }
 .light.is-orange {
   background-color: map-get($color-action, another);
 }
 .light.is-yellow {
-  background-color: map-get($color-action, EFE252);
+  background-color: map-get($color-action, main);
+  box-shadow: inset 0 .5px 0,
+                    0 2.5px 0,
+                    0 4.5px 0;
 }
 .in-animated {
-  background: radial-gradient(hsl(0, 100%, 70%), hsl(0, 97%, 25%));
+  // background: radial-gradient(hsl(0, 100%, 70%), hsl(0, 97%, 25%));
   text-shadow: 0 -1px 0 #c30707;
-  box-shadow: inset 0 .5px   0 hsl(0, 100%, 50%),
-                    0 1px 0 hsl(0, 100%, 20%),
-                    0 1.5px   0 hsl(0, 100%, 18%),
-                    0 2px 0 hsl(0, 100%, 16%),
-                    0 2.5px   0 hsl(0, 100%, 14%),
-                    0 3px 0 hsl(0, 100%, 12%),
-                    0 3.5px   0 hsl(0, 100%, 10%),
-                    0 4px 0 hsl(0, 100%, 8%),
-                    0 4.5px   0 hsl(0, 100%, 6%);
+  // box-shadow: inset 0 .5px 0,
+  //                   0 2.5px 0,
+  //                   0 4.5px 0;
+  box-shadow: #ffff 1px 1px 18px;
   animation: change-lights .5s infinite;
 }
 // .in-animated:hover, .in-animated:active {
@@ -173,16 +197,16 @@
 // }
 @keyframes change-lights {
   0% {
-    background: radial-gradient(hsl(0, 100%, 70%), hsl(0, 97%, 20%));
+    background: radial-gradient(hsl(192, 31%, 45%), hsl(221, 66%, 45%));
   }
   25% {
-    background: radial-gradient(hsl(0, 90%, 70%), hsl(0, 97%, 30%));
+    background: radial-gradient(hsl(194, 34%, 49%), hsl(219, 76%, 35%));
   }
   50% {
-    background: radial-gradient(hsl(0, 80%, 70%), hsl(0, 97%, 40%));
+    background: radial-gradient(hsl(199, 62%, 61%), hsl(229, 86%, 25%));
   }
   100% {
-    background: radial-gradient(hsl(0, 70%, 70%), hsl(0, 97%, 50%));
+    background: radial-gradient(hsl(192, 92%, 70%), hsl(218, 96%, 15%));
   }
 }
 .pokedex-left {
@@ -204,8 +228,7 @@
 }
 .pokedex-left-bottom-lights {
   display: flex;
-  align-items: flex-start;
-
+  align-items: center;
 }
 .pokedex-left-bottom {
   margin-top: 1em;
