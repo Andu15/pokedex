@@ -18,7 +18,12 @@
 <script>
     export default {
         name: 'PokedexForm',
-        props: {},
+        props: {
+            pokemonData: {
+                type: Object,
+                default: () => {}
+            }
+        },
         components: {},
         data(){
             return {
@@ -26,14 +31,20 @@
             }
         },
         computed: {},
-        watch: {},
+        watch: {
+            pokemonData(newValue, oldValue){
+                if (newValue && newValue.name) {
+                    this.pokemonName = newValue.name;
+                }
+            }
+        },
         methods: {
             handleSubmit (e) {
                 e.preventDefault()
                 // const pokemonName = this.pokemonName
             },
             emitSearchEvent(){
-                this.$emit("search", this.pokemonName);
+                this.$emit("search", this.pokemonName.toLowerCase());
             }
         },
         beforeCreate(){},

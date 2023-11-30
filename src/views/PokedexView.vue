@@ -17,7 +17,7 @@
             <div class="light is-green is-large dark-shadow" />
             <div class="light is-orange is-large dark-shadow" />
           </div>
-          <pokedex-form @search="handleSearch"/>
+          <pokedex-form :pokemonData="pokemon" @search="handleSearch"/>
         </div>
         <div class="arrow-btns-group">
           <button class="arrow-up-btn" @click="getPokemonDecrease">
@@ -42,7 +42,9 @@
       <div class="pokedex-triangle"></div>
       <p class="pokedex-bar"></p>
     </div>
-    <div class="pokedex-right-back" />
+    <div class="pokedex-right-back" >
+
+    </div>
   </div>
 </template>
 <script>
@@ -61,7 +63,7 @@
         data(){
             return {
               error: false,
-              loading: true,
+              loading: false,
               pokemon: null,
               // pokemonId: Math.floor(Math.random() * 806 + 1).toString(),
               counterId: 1,
@@ -72,12 +74,14 @@
         watch: {},
         methods: {
           async getPokemonById(){
+            this.loading = true
             try {
               this.pokemon = await getRandomPokemonData(this.counterId)
               this.loading = false
             } catch (error) {
               this.loading = false
               this.error = true
+              console.log("error", error)
               // throw error;
             }
           },
@@ -99,8 +103,10 @@
             this.searchedPokemonName = searchText;
           },
           async getPokemonByName(pokemonName){
+            this.loading = true
             try {
               this.pokemon = await getRandomPokemonData(pokemonName)
+              console.log("this.pokemon", this.pokemon)
               this.loading = false
             } catch (error) {
               this.loading = false
