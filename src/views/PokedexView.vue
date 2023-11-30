@@ -11,12 +11,31 @@
         <pokedex-screen />
       </div>
       <div class="pokedex-left-bottom">
-        <div class="pokedex-left-bottom-lights">
-          <div class="light is-blue is-medium" />
-          <div class="light is-green is-large" />
-          <div class="light is-orange is-large" />
+        <div>
+          <div class="pokedex-left-bottom-lights">
+            <div class="light is-blue is-medium dark-shadow" />
+            <div class="light is-green is-large dark-shadow" />
+            <div class="light is-orange is-large dark-shadow" />
+          </div>
+          <pokedex-form/>
         </div>
-        <pokedex-form/>
+        <div class="arrow-btns-group">
+          <button class="arrow-up-btn">
+            <img src="@/assets/icons/arrow-up.svg" alt="arriba" />
+          </button>
+          <button class="arrow-left-btn">
+            <img src="@/assets/icons/arrow-left.svg" alt="izquierda" />
+          </button>
+          <button class="arrow-ok-btn">
+            OK
+          </button>
+          <button class="arrow-right-btn">
+            <img src="@/assets/icons/arrow-right.svg" alt="derecha" />
+          </button>
+          <button class="arrow-down-btn">
+            <img src="@/assets/icons/arrow-down.svg" alt="abajo" />
+          </button>
+        </div>
       </div>
     </div>
     <div class="pokedex-right-front" >
@@ -30,6 +49,8 @@
     import pokedexScreen from '@/components/PokedexScreen.vue'
     import pokedexForm from '@/components/PokedexForm.vue'
 
+    import { getRandomPokemonData } from '@/assets/services/pokemonApi'
+
     export default {
         name: 'PokedexView',
         props: {},
@@ -39,6 +60,10 @@
         },
         data(){
             return {
+              error: false,
+              loading: true,
+              pokemon: null,
+              pokemonId: Math.floor(Math.random() * 806 + 1).toString()
             }
         },
         computed: {},
@@ -46,7 +71,9 @@
         methods: {
         },
         beforeCreate(){},
-        created(){},
+        created(){
+          console.log("this.getRandomPokemonData(pokemonId)", this.getRandomPokemonData(pokemonId))
+        },
         beforeMount(){},
         mounted(){},
         beforeUpdate(){},

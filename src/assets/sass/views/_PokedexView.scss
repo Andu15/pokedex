@@ -149,11 +149,11 @@
   height: 50px;
 }
 .light.is-medium {
-  width: 40px;
-  height: 40px;
+  width: 35px;
+  height: 35px;
 }
 .light.is-large {
-  width: 80px;
+  width: 65px;
   border-radius: 20px;
 }
 .light.is-red {
@@ -164,6 +164,9 @@
 }
 .light.is-blue {
   background-color: map-get($color-base, another);
+  box-shadow: 0 .5px 0,
+                    0 2.5px 0,
+                    0 4.5px 0;
 }
 .light.is-green {
   background-color: map-get($color-action, secondary);
@@ -176,12 +179,18 @@
 }
 .light.is-orange {
   background-color: map-get($color-action, another);
+  box-shadow: inset 0 .5px 0,
+                    0 2.5px 0,
+                    0 4.5px 0;
 }
 .light.is-yellow {
   background-color: map-get($color-action, main);
   box-shadow: inset 0 .5px 0,
                     0 2.5px 0,
                     0 4.5px 0;
+}
+.dark-shadow {
+  box-shadow: 5px 4px 0px 0px rgba(74,74,74,1) !important;
 }
 .in-animated {
   // background: radial-gradient(hsl(0, 100%, 70%), hsl(0, 97%, 25%));
@@ -232,6 +241,10 @@
 }
 .pokedex-left-bottom {
   margin-top: 1em;
+  // display: flex;
+  // justify-content: space-between;
+  display: grid;
+  grid-template-columns: 70% 30%;
 }
 .pokedex-left-bottom-lights  > * {
   margin-right: .8em;
@@ -244,4 +257,87 @@
   margin: 20px 10px 40px;
   height: 55%;
   padding: .6rem;
+}
+/* arrow-btns */
+.arrow-btns-group {
+  display: grid;
+  grid-template-columns: repeat(9, 30px);
+  grid-template-rows: repeat(2, 30px);
+}
+.arrow-up-btn {
+  grid-column-start: 2;
+  grid-row-start: 1;
+  display: flex;
+  justify-content: center;
+  border-radius: 5px 5px 0 0;
+  border: none;
+  background-color: map-get($map: $color-base, $key: secondary);
+}
+.arrow-up-btn:hover, .arrow-up-btn:active{
+  cursor: pointer;
+  background-color: map-get($map: $color-base, $key: third);
+  transform: scale(0.9);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+.arrow-left-btn {
+  grid-column-start: 1;
+  grid-row-start: 2;
+  display: flex;
+  justify-content: center;
+  border-radius: 5px 0 0 5px;
+  border: none;
+  background-color: map-get($map: $color-base, $key: secondary);
+}
+.arrow-left-btn:hover, .arrow-left-btn:active{
+  cursor: pointer;
+  background-color: map-get($map: $color-base, $key: third);
+  transform: scale(0.9);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+.arrow-ok-btn {
+  grid-column-start: 2;
+  grid-row-start: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  background-color: map-get($map: $color-base, $key: secondary);
+  color:map-get($map: $color-text, $key: main);
+}
+.arrow-ok-btn:hover, .arrow-ok-btn:active{
+  cursor: pointer;
+  background-color: map-get($map: $color-base, $key: third);
+  transform: scale(0.9);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  color: map-get($map: $color-text, $key: another);
+}
+.arrow-right-btn {
+  grid-column-start: 3;
+  grid-row-start: 2;
+  display: flex;
+  justify-content: center;
+  border-radius: 0 5px 5px 0;
+  border: none;
+  background-color: map-get($map: $color-base, $key: secondary);
+}
+.arrow-right-btn:hover, .arrow-right-btn:active{
+  cursor: pointer;
+  background-color: map-get($map: $color-base, $key: third);
+  transform: scale(0.9);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+.arrow-down-btn {
+  grid-column-start: 2;
+  grid-row-start: 3;
+  display: flex;
+  justify-content: center;
+  border-radius: 0 0 5px 5px;
+  border: none;
+  background-color: map-get($map: $color-base, $key: secondary);
+}
+.arrow-down-btn:hover, .arrow-down-btn:active{
+  cursor: pointer;
+  background-color: map-get($map: $color-base, $key: third);
+  transform: scale(0.9);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }

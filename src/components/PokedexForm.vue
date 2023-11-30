@@ -7,11 +7,11 @@
         v-model="pokemonName"
         placeholder="Busca tu pokemon"
         autocomplete="off"/>
-        <input
+        <!-- <input
         type="submit"
         class="pokemon-btn"
         value="Ir"
-        />
+        /> -->
     </form>
 </template>
 <script>
