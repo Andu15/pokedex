@@ -43,7 +43,14 @@
       <p class="pokedex-bar"></p>
     </div>
     <div class="pokedex-right-back" >
-
+      <div style="width:100%">
+        <div class="readonly-textarea" v-html="pokemonInformation" readonly></div>
+      </div>
+      <div>
+        <div>
+          <p><strong>Tipo:</strong></p>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -65,21 +72,64 @@
               error: false,
               loading: false,
               pokemon: null,
+              isPokemonFound: false,
               // pokemonId: Math.floor(Math.random() * 806 + 1).toString(),
               counterId: 1,
-              searchedPokemonName: ''
+              searchedPokemonName: '',
+              pokemonInformation: ''
             }
         },
         computed: {},
-        watch: {},
+        watch: {
+            error(newValue, oldValue){
+                if (newValue) {
+                    this.pokemonInformation = `<h3>¡Lo sentimos!</h3>
+                                              <p>El pokemon que buscas no existe, intenta nuevamente</p>`
+                }
+            },
+            isPokemonFound(newValue, oldValue){
+              if(newValue){
+                console.log("pokemon", this.pokemon)
+                this.pokemonInformation = `
+                                          <p><strong>Identificador: </strong><span>${this.pokemon.id}</span></p>
+                                          <p><strong>Nombre: </strong><span>${this.pokemon.name}</span></p>
+                                          <p><strong>Altura: </strong><span>${this.pokemon.height}</span></p>
+                                          <p><strong>Peso: </strong><span>${this.pokemon.weight}</span></p>
+                                          <p><strong>Experiencia: </strong><span>${this.pokemon.base_experience}</span></p>
+                                          `
+              }
+            }
+        },
         methods: {
           async getPokemonById(){
             this.loading = true
+            this.error = false
+            this.isPokemonFound = false
+            this.pokemonInformation = ''
             try {
               this.pokemon = await getRandomPokemonData(this.counterId)
               this.loading = false
+              this.isPokemonFound = true
             } catch (error) {
               this.loading = false
+              this.isPokemonFound = false
+              this.error = true
+              console.log("error", error)
+              // throw error;
+            }
+          },
+          async getPokemonByName(pokemonName){
+            this.loading = true
+            this.error = false
+            this.isPokemonFound = false
+            this.pokemonInformation = ''
+            try {
+              this.pokemon = await getRandomPokemonData(pokemonName)
+              this.loading = false
+              this.isPokemonFound = true
+            } catch (error) {
+              this.loading = false
+              this.isPokemonFound = false
               this.error = true
               console.log("error", error)
               // throw error;
@@ -101,19 +151,6 @@
           },
           handleSearch(searchText){
             this.searchedPokemonName = searchText;
-          },
-          async getPokemonByName(pokemonName){
-            this.loading = true
-            try {
-              this.pokemon = await getRandomPokemonData(pokemonName)
-              console.log("this.pokemon", this.pokemon)
-              this.loading = false
-            } catch (error) {
-              this.loading = false
-              this.error = true
-              console.log("error", error)
-              // throw error;
-            }
           },
           searchPokemon(){
             if(this.searchedPokemonName.length > 0){
