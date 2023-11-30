@@ -6,7 +6,8 @@
         name="pokemon"
         v-model="pokemonName"
         placeholder="Busca tu pokemon"
-        autocomplete="off"/>
+        autocomplete="off" 
+        @input="emitSearchEvent" />
         <!-- <input
         type="submit"
         class="pokemon-btn"
@@ -29,8 +30,10 @@
         methods: {
             handleSubmit (e) {
                 e.preventDefault()
-                const pokemonName = this.pokemonName
-
+                // const pokemonName = this.pokemonName
+            },
+            emitSearchEvent(){
+                this.$emit("search", this.pokemonName);
             }
         },
         beforeCreate(){},

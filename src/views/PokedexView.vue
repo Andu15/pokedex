@@ -8,7 +8,7 @@
         <div class="light is-green" />
       </div>
       <div class="pokedex-screen-container">
-        <pokedex-screen />
+        <pokedex-screen :pokemonData="pokemon"/>
       </div>
       <div class="pokedex-left-bottom">
         <div>
@@ -17,22 +17,22 @@
             <div class="light is-green is-large dark-shadow" />
             <div class="light is-orange is-large dark-shadow" />
           </div>
-          <pokedex-form/>
+          <pokedex-form @search="handleSearch"/>
         </div>
         <div class="arrow-btns-group">
-          <button class="arrow-up-btn">
+          <button class="arrow-up-btn" @click="getPokemonDecrease">
             <img src="@/assets/icons/arrow-up.svg" alt="arriba" />
           </button>
           <button class="arrow-left-btn">
             <img src="@/assets/icons/arrow-left.svg" alt="izquierda" />
           </button>
-          <button class="arrow-ok-btn">
+          <button class="arrow-ok-btn" @click="searchPokemon">
             OK
           </button>
           <button class="arrow-right-btn">
             <img src="@/assets/icons/arrow-right.svg" alt="derecha" />
           </button>
-          <button class="arrow-down-btn">
+          <button class="arrow-down-btn" @click="getPokemonIncrease">
             <img src="@/assets/icons/arrow-down.svg" alt="abajo" />
           </button>
         </div>
@@ -63,16 +63,61 @@
               error: false,
               loading: true,
               pokemon: null,
-              pokemonId: Math.floor(Math.random() * 806 + 1).toString()
+              // pokemonId: Math.floor(Math.random() * 806 + 1).toString(),
+              counterId: 1,
+              searchedPokemonName: ''
             }
         },
         computed: {},
         watch: {},
         methods: {
+          async getPokemonById(){
+            try {
+              this.pokemon = await getRandomPokemonData(this.counterId)
+              this.loading = false
+            } catch (error) {
+              this.loading = false
+              this.error = true
+              // throw error;
+            }
+          },
+          increaseCounterId(){
+            this.counterId++
+          },
+          decreaseCounterId(){
+            this.counterId > 1 ? this.counterId-- : false
+          },
+          getPokemonDecrease(){
+            this.decreaseCounterId()
+            this.getPokemonById()
+          },
+          getPokemonIncrease(){
+            this.increaseCounterId()
+            this.getPokemonById()
+          },
+          handleSearch(searchText){
+            this.searchedPokemonName = searchText;
+          },
+          async getPokemonByName(pokemonName){
+            try {
+              this.pokemon = await getRandomPokemonData(pokemonName)
+              this.loading = false
+            } catch (error) {
+              this.loading = false
+              this.error = true
+              console.log("error", error)
+              // throw error;
+            }
+          },
+          searchPokemon(){
+            if(this.searchedPokemonName.length > 0){
+              this.getPokemonByName(this.searchedPokemonName)
+            }
+          }
         },
         beforeCreate(){},
         created(){
-          console.log("this.getRandomPokemonData(pokemonId)", this.getRandomPokemonData(pokemonId))
+          this.getPokemonById()
         },
         beforeMount(){},
         mounted(){},

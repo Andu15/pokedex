@@ -1,6 +1,6 @@
 <template>
     <section class="pokedex-screen">
-        <div v-if="status==='wait'" style="display:flex; justify-content: center;">
+        <!-- <div v-if="status==='wait'" style="display:flex; justify-content: center;">
             <Pokeball />
         </div>
         <div v-else-if="status==='loading'">
@@ -8,8 +8,8 @@
         </div>
         <div v-else-if="status==='error'">
             <img src="" alt="Hubo un error" class="pokedex-no-screen"/>
-        </div>
-        <div v-else class="pokemon-info" >
+        </div> -->
+        <!-- <div v-else class="pokemon-info" > -->
             <!-- <h2 class="pokemon-name">{{pokemon.name}}</h2>
             <img
             class="pokemon-img"
@@ -22,6 +22,14 @@
                 v-bind:key="item.stat.name"
                 />
             </ul> -->
+        <!-- </div> -->
+        <div class="pokemon-info">
+            <!-- <h2 class="pokemon-name">{{ pokemonData.name.toUpperCase() }}</h2> -->
+            <img
+            class="pokemon-img"
+            v-if="pokemonData && pokemonData.sprites && pokemonData.sprites.other && pokemonData.sprites.other.dream_world.front_default"
+            v-bind:src="pokemonData.sprites.other.dream_world.front_default"
+            :alt="pokemonData.name" />
         </div>
     </section>
 </template>
@@ -30,25 +38,33 @@
 
     export default {
         name: 'PokedexScreen',
-        props: {},
+        props: {
+            pokemonData: {
+                type: Object,
+                default: () => {}
+            }
+        },
         components: {
             Pokeball,
         },
         data(){
             return {
                 // error | loading | done | wait
-                status: 'wait'
+                // status: 'wait'
             }
         },
         computed: {},
         watch: {},
         methods: {},
         beforeCreate(){},
-        created(){},
+        created(){
+            console.log("pokemonData", this.pokemonData)
+        },
         beforeMount(){},
         mounted(){},
         beforeUpdate(){},
-        updated(){},
+        updated(){
+        },
         beforeDestroy(){},
         destroyed(){}
     }
