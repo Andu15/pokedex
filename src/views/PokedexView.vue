@@ -23,13 +23,13 @@
           <button class="arrow-up-btn" @click="getPokemonDecrease">
             <img src="@/assets/icons/arrow-up.svg" alt="arriba" />
           </button>
-          <button class="arrow-left-btn">
+          <button class="arrow-left-btn" @click="getRandomImgPokemon">
             <img src="@/assets/icons/arrow-left.svg" alt="izquierda" />
           </button>
           <button class="arrow-ok-btn" @click="searchPokemon">
             OK
           </button>
-          <button class="arrow-right-btn">
+          <button class="arrow-right-btn" @click="getRandomImgPokemon">
             <img src="@/assets/icons/arrow-right.svg" alt="derecha" />
           </button>
           <button class="arrow-down-btn" @click="getPokemonIncrease">
@@ -43,23 +43,19 @@
       <p class="pokedex-bar"></p>
     </div>
     <div class="pokedex-right-back" >
-      <div style="width:100%">
-        <div class="readonly-textarea" v-html="pokemonInformation" readonly></div>
-        <div>
-          <p class="pokedex-type-text"><strong>Tipo:</strong></p>
-          <img class="pokedex-type-img" v-for="type in pokemonTypes" :key="type.id" :src="type.img" :alt="type.value" />
-        </div>
-      </div>
-      <div>
-        <!-- <section>
-          <ol v-if="pokemon && pokemon.moves">
-            <li v-for="(move, index) in pokemon.moves" :key="index">{{ move.move.name }}</li>
-          </ol>
-        </section> -->
+      <div class="readonly-textarea" v-html="pokemonInformation" readonly style="width:90%"></div>
+      <div class="pokemonInfo-sections">
         <section>
-          <!-- <ul class="pokemon-stats"> -->
-            <pokedex-stat :pokemonData="pokemon" />
-          <!-- </ul> -->
+          <pokedex-stat :pokemonData="pokemon" />
+        </section>
+        <section>
+          <article>
+            <img style="width:200px" :src="randomImagesPokemon[getIndexRandom(randomImagesPokemon)]" alt="pokemon"/>
+          </article>
+          <article>
+            <p class="pokedex-type-text"><strong>Tipo:</strong></p>
+            <img class="pokedex-type-img" v-for="type in pokemonTypes" :key="type.id" :src="type.img" :alt="type.value" />
+          </article>
         </section>
       </div>
     </div>
@@ -70,7 +66,7 @@
     import pokedexForm from '@/components/PokedexForm.vue'
     import pokedexStat from '@/components/PokedexStat.vue'
 
-    import { getRandomPokemonData } from '@/assets/services/pokemonApi'
+    import { getRandomPokemonData, requestHandler } from '@/assets/services/pokemonApi'
     import pokemonTypes from '@/assets/utilities/pokemonTypes.js'
 
     export default {
@@ -91,7 +87,8 @@
               counterId: 1,
               searchedPokemonName: '',
               pokemonInformation: '',
-              pokemonTypes: []
+              pokemonTypes: [],
+              randomImagesPokemon: []
             }
         },
         computed: {
@@ -119,8 +116,8 @@
                 this.pokemonInformation = `
                                           <p><strong>Identificador: </strong><span>${this.pokemon.id}</span></p>
                                           <p><strong>Nombre: </strong><span>${this.pokemon.name}</span></p>
-                                          <p><strong>Altura: </strong><span>${this.pokemon.height}</span></p>
-                                          <p><strong>Peso: </strong><span>${this.pokemon.weight}</span></p>
+                                          <p><strong>Altura: </strong><span>${this.pokemon.height} m</span></p>
+                                          <p><strong>Peso: </strong><span>${this.pokemon.weight} Kg</span></p>
                                           <p><strong>Experiencia: </strong><span>${this.pokemon.base_experience}</span></p>
                                           `
               }
@@ -161,6 +158,16 @@
               // throw error;
             }
           },
+          async getSpeciesByPokemon(httpSpecie){
+            try {
+              const formData = await requestHandler(httpSpecie)
+              const imgArray = Object.values(formData.sprites)
+              const arrayWithoutNulls = imgArray.filter(elemento => elemento !== null);
+              this.randomImagesPokemon = arrayWithoutNulls
+            } catch (error) {
+              console.log("error", error)
+            }
+          },
           increaseCounterId(){
             this.counterId++
           },
@@ -182,11 +189,20 @@
             if(this.searchedPokemonName.length > 0){
               this.getPokemonByName(this.searchedPokemonName)
             }
+          },
+          getIndexRandom(array){
+            const randomNumber = Math.random()
+            const randomIndex = Math.floor(randomNumber * array.length);
+            return randomIndex;
+          },
+          getRandomImgPokemon(){
+            this.getSpeciesByPokemon(this.pokemon.forms[0].url)
           }
         },
         beforeCreate(){},
-        created(){
-          this.getPokemonById()
+        async created(){
+          await this.getPokemonById()
+          await this.getSpeciesByPokemon(this.pokemon.forms[0].url)
         },
         beforeMount(){},
         mounted(){},

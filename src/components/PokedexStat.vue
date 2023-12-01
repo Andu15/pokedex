@@ -1,15 +1,10 @@
 <template>
-    <!-- <div v-if="pokemonData.stats">
-        <li class="pokemon-stat"  v-for="(stat, index) in pokemonData.stats" :key="index">
-            <span class="stat-name">
-                <b>{{ stat.stat.name }}: </b>
-            </span>
-            <span>{{ stat.base_stat }}</span>
-        </li>
-    </div> -->
-    <div class="stats">
-        <canvas id="stats" ref="stats" width="200" height="200"></canvas>
-    </div>
+    <section v-if="pokemonData && pokemonData.stats">
+        <div class="pokemon-stat"  v-for="(stat, index) in pokemonData.stats" :key="index">
+            <p style="line-height: 1px">{{ stat.stat.name }}:</p>
+            <progress id="progress-stat" max="100" :value="stat.base_stat">{{ stat.base_stat }}</progress>
+        </div>
+    </section>
 </template>
 <script>
     export default {
