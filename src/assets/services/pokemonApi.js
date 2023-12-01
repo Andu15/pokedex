@@ -32,8 +32,19 @@ const getRandomPokemonData = async (pokemonId) => {
   }
 }
 
+const getSpeciesPokemon = async (pokemonId) => {
+  try {
+    const response = await axios.get(`${baseUrl}/pokemon-species/${pokemonId}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching Pokemon data:', error.message);
+    throw error;
+  }
+}
+
 export {
   getPokemons,
   getSpecificPokemonData,
-  getRandomPokemonData
+  getRandomPokemonData,
+  getSpeciesPokemon
 }

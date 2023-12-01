@@ -1,13 +1,29 @@
 <template>
-    <div class="container"></div>
+    <!-- <div v-if="pokemonData.stats">
+        <li class="pokemon-stat"  v-for="(stat, index) in pokemonData.stats" :key="index">
+            <span class="stat-name">
+                <b>{{ stat.stat.name }}: </b>
+            </span>
+            <span>{{ stat.base_stat }}</span>
+        </li>
+    </div> -->
+    <div class="stats">
+        <canvas id="stats" ref="stats" width="200" height="200"></canvas>
+    </div>
 </template>
 <script>
     export default {
-        name: 'Stat',
-        props: {},
+        name: 'PokedexStat',
+        props: {
+            pokemonData: {
+                type: Object,
+                default: () => {}
+            }
+        },
         components: {},
         data(){
-            return {}
+            return {
+            }
         },
         computed: {},
         watch: {},

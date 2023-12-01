@@ -45,11 +45,22 @@
     <div class="pokedex-right-back" >
       <div style="width:100%">
         <div class="readonly-textarea" v-html="pokemonInformation" readonly></div>
+        <div>
+          <p class="pokedex-type-text"><strong>Tipo:</strong></p>
+          <img class="pokedex-type-img" v-for="type in pokemonTypes" :key="type.id" :src="type.img" :alt="type.value" />
+        </div>
       </div>
       <div>
-        <div>
-          <p><strong>Tipo:</strong></p>
-        </div>
+        <!-- <section>
+          <ol v-if="pokemon && pokemon.moves">
+            <li v-for="(move, index) in pokemon.moves" :key="index">{{ move.move.name }}</li>
+          </ol>
+        </section> -->
+        <section>
+          <!-- <ul class="pokemon-stats"> -->
+            <pokedex-stat :pokemonData="pokemon" />
+          <!-- </ul> -->
+        </section>
       </div>
     </div>
   </div>
@@ -57,15 +68,18 @@
 <script>
     import pokedexScreen from '@/components/PokedexScreen.vue'
     import pokedexForm from '@/components/PokedexForm.vue'
+    import pokedexStat from '@/components/PokedexStat.vue'
 
     import { getRandomPokemonData } from '@/assets/services/pokemonApi'
+    import pokemonTypes from '@/assets/utilities/pokemonTypes.js'
 
     export default {
         name: 'PokedexView',
         props: {},
         components: {
           'pokedex-screen': pokedexScreen,
-          'pokedex-form' : pokedexForm
+          'pokedex-form' : pokedexForm,
+          'pokedex-stat': pokedexStat
         },
         data(){
             return {
@@ -76,10 +90,21 @@
               // pokemonId: Math.floor(Math.random() * 806 + 1).toString(),
               counterId: 1,
               searchedPokemonName: '',
-              pokemonInformation: ''
+              pokemonInformation: '',
+              pokemonTypes: []
             }
         },
-        computed: {},
+        computed: {
+          getPokemonType(){
+            const arrayPokemonTypes = []
+            pokemonTypes.map((type) => {
+              this.pokemon.types.map((pokemonType) => {
+                type.name === pokemonType.type.name ? arrayPokemonTypes.push(type) : false
+              })
+            })
+            this.pokemonTypes = arrayPokemonTypes
+          }
+        },
         watch: {
             error(newValue, oldValue){
                 if (newValue) {
@@ -89,7 +114,8 @@
             },
             isPokemonFound(newValue, oldValue){
               if(newValue){
-                console.log("pokemon", this.pokemon)
+                this.getPokemonType
+                console.log("this.pokemon", this.pokemon)
                 this.pokemonInformation = `
                                           <p><strong>Identificador: </strong><span>${this.pokemon.id}</span></p>
                                           <p><strong>Nombre: </strong><span>${this.pokemon.name}</span></p>
