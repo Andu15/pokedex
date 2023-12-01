@@ -49,10 +49,11 @@
           <pokedex-stat :pokemonData="pokemon" />
         </section>
         <section>
-          <article>
-            <img style="width:200px" :src="randomImagesPokemon[getIndexRandom(randomImagesPokemon)]" alt="pokemon"/>
+          <article class="img-container">
+            <img class="random-pokemon-img" :src="randomImagesPokemon[getIndexRandom(randomImagesPokemon)]" alt="pokemon"/>
+            <p class="random-pokemon-name">Fig. {{ pokemon.name }}</p>
           </article>
-          <article>
+          <article style="width: 100%;">
             <p class="pokedex-type-text"><strong>Tipo:</strong></p>
             <img class="pokedex-type-img" v-for="type in pokemonTypes" :key="type.id" :src="type.img" :alt="type.value" />
           </article>

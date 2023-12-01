@@ -364,4 +364,26 @@
 .pokemonInfo-sections {
   display: flex;
   flex-direction: row;
+  column-gap: 40px;
+}
+/**/
+.img-container {
+  // width: 100%;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: map-get($map: $color-text, $key: another);
+  margin-top: 1rem;
+  margin-bottom: 3rem;
+  border-radius: 10px;
+  border: 1px solid map-get($map: $color-text, $key: secondary);
+}
+.random-pokemon-img {
+  max-width: 100%;
+  height: auto;
+}
+.random-pokemon-name {
+  @include fonts-style(map-get($color-text, main), 'Roboto', 10px, 700, 2px, 0)
 }
