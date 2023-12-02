@@ -1,0 +1,30 @@
+@import '@/assets/sass/utilities/variables.scss';
+@import '@/assets/sass/utilities/mixins.scss';
+
+.pokemon-stat {
+  line-height: 1px;
+  margin-top: 1.5rem;
+}
+.pokemon-stat-name {
+  @include fonts-style(map-get($color-text, another), 'Roboto', 12px, 500, 0, 0)
+}
+.pokemon-stat-progress {
+  display: flex;
+  flex-direction: row;
+  // justify-content: space-evenly;
+  // align-content: center;
+  align-items: center;
+  column-gap: 10px;
+}
+.pokemon-stat-progress-bar {
+  width: 150px;
+  height: 20px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border: none;
+  color: darkred;
+}
+.pokemon-stat-base {
+  // margin-left: 5px;
+}
