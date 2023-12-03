@@ -142,8 +142,6 @@
               this.loading = false
               this.isPokemonFound = false
               this.error = true
-              console.log("error", error)
-              // throw error;
             }
           },
           async getPokemonByName(pokemonName){
@@ -160,8 +158,6 @@
               this.loading = false
               this.isPokemonFound = false
               this.error = true
-              console.log("error", error)
-              // throw error;
             }
           },
           async getSpeciesByPokemon(httpSpecie){
@@ -171,7 +167,9 @@
               const arrayWithoutNulls = imgArray.filter(elemento => elemento !== null);
               this.randomImagesPokemon = arrayWithoutNulls
             } catch (error) {
-              console.log("error", error)
+              this.loading = false
+              this.isPokemonFound = false
+              this.error = true
             }
           },
           increaseCounterId(){

@@ -49,11 +49,7 @@
         watch: {},
         methods: {},
         beforeCreate(){},
-        created(){
-            console.log("loading", this.loading)
-            console.log("error", this.error)
-            console.log("pokemonData", this.pokemonData)
-        },
+        created(){},
         beforeMount(){},
         mounted(){},
         beforeUpdate(){},
