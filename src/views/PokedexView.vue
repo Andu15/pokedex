@@ -8,7 +8,7 @@
         <div class="light is-green" />
       </div>
       <div class="pokedex-screen-container">
-        <pokedex-screen :pokemonData="pokemon"/>
+        <pokedex-screen :pokemonData="pokemon" :loading="loading" :error="error" />
       </div>
       <div class="pokedex-left-bottom">
         <div>
@@ -48,7 +48,7 @@
         <section>
           <pokedex-stat :pokemonData="pokemon" />
         </section>
-        <section>
+        <section v-if="error === false && loading === false">
           <article class="img-container">
             <img class="random-pokemon-img" :src="randomImagesPokemon[getIndexRandom(randomImagesPokemon)]" alt="pokemon"/>
             <p class="random-pokemon-name">Fig. {{ pokemon.name }}</p>
@@ -82,9 +82,8 @@
             return {
               error: false,
               loading: false,
-              pokemon: null,
+              pokemon: {},
               isPokemonFound: false,
-              // pokemonId: Math.floor(Math.random() * 806 + 1).toString(),
               counterId: 1,
               searchedPokemonName: '',
               pokemonInformation: '',
@@ -107,13 +106,12 @@
             error(newValue, oldValue){
                 if (newValue) {
                     this.pokemonInformation = `<h3>¡Lo sentimos!</h3>
-                                              <p>El pokemon que buscas no existe, intenta nuevamente</p>`
+                                              <p>El pokemon que buscas no existe</p>`
                 }
             },
             isPokemonFound(newValue, oldValue){
               if(newValue){
                 this.getPokemonType
-                console.log("this.pokemon", this.pokemon)
                 this.pokemonInformation = `
                                           <p><strong>Identificador: </strong><span>${this.pokemon.id}</span></p>
                                           <p><strong>Nombre: </strong><span>${this.pokemon.name}</span></p>
@@ -125,7 +123,7 @@
             },
             pokemon(newValue, oldValue){
               if(newValue){
-                this.getSpeciesByPokemon(this.pokemon.forms[0].url)
+                this.getRandomImgPokemon()
               }
             }
         },
@@ -134,6 +132,7 @@
             this.loading = true
             this.error = false
             this.isPokemonFound = false
+            // this.pokemon = null
             this.pokemonInformation = ''
             try {
               this.pokemon = await getRandomPokemonData(this.counterId)
@@ -151,6 +150,7 @@
             this.loading = true
             this.error = false
             this.isPokemonFound = false
+            this.pokemon = {}
             this.pokemonInformation = ''
             try {
               this.pokemon = await getRandomPokemonData(pokemonName)
@@ -167,7 +167,7 @@
           async getSpeciesByPokemon(httpSpecie){
             try {
               const formData = await requestHandler(httpSpecie)
-              const imgArray = Object.values(formData.sprites)
+              const imgArray = formData.sprites ? Object.values(formData.sprites) : []
               const arrayWithoutNulls = imgArray.filter(elemento => elemento !== null);
               this.randomImagesPokemon = arrayWithoutNulls
             } catch (error) {
@@ -202,13 +202,17 @@
             return randomIndex;
           },
           getRandomImgPokemon(){
-            this.getSpeciesByPokemon(this.pokemon.forms[0].url)
+            if (this.pokemon && this.pokemon.forms && this.pokemon.forms[0] && this.pokemon.forms[0].url) {
+              this.getSpeciesByPokemon(this.pokemon.forms[0].url);
+            }
           }
         },
         beforeCreate(){},
         async created(){
-          await this.getPokemonById()
-          await this.getSpeciesByPokemon(this.pokemon.forms[0].url)
+          await Promise.all([
+            this.getPokemonById(),
+            this.getRandomImgPokemon()
+          ]);
         },
         beforeMount(){},
         mounted(){},

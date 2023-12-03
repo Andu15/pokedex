@@ -3,7 +3,7 @@
         <div class="pokemon-stat"  v-for="(stat, index) in pokemonData.stats" :key="index">
             <p class="pokemon-stat-name" >{{ stat.stat.name.toUpperCase() }}:</p>
             <div class="pokemon-stat-progress">
-                <progress class="pokemon-stat-progress-bar" id="progress-stat" max="100" :value="stat.base_stat" />
+                <progress class="pokemon-stat-progress-bar" id="progress-stat" max="200" :value="stat.base_stat" />
                 <span class="pokemon-stat-base">{{ stat.base_stat }}</span>
             </div>
         </div>

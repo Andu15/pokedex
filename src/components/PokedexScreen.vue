@@ -1,30 +1,12 @@
 <template>
     <section class="pokedex-screen">
-        <!-- <div v-if="status==='wait'" style="display:flex; justify-content: center;">
-            <Pokeball />
+        <div class="pokemon-info" v-if="loading">
+            <initial-transition />
         </div>
-        <div v-else-if="status==='loading'">
-            <img src="" alt="Estamos cargando la información" class="pokedex-no-screen"/>
+        <div class="pokemon-info" v-else-if="error">
+            <Pokeball/>
         </div>
-        <div v-else-if="status==='error'">
-            <img src="" alt="Hubo un error" class="pokedex-no-screen"/>
-        </div> -->
-        <!-- <div v-else class="pokemon-info" > -->
-            <!-- <h2 class="pokemon-name">{{pokemon.name}}</h2>
-            <img
-            class="pokemon-img"
-            v-bind:src="pokemon.sprites.front_default"
-            v-bind:alt="pokemon.name" />
-            <ul class="pokemon-stats">
-                <Stat
-                v-bind:item="item"
-                v-for="item in pokemon.stats"
-                v-bind:key="item.stat.name"
-                />
-            </ul> -->
-        <!-- </div> -->
-        <div class="pokemon-info">
-            <!-- <h2 class="pokemon-name">{{ pokemonData.name.toUpperCase() }}</h2> -->
+        <div class="pokemon-info" else>
             <img
             class="pokemon-img"
             v-if="pokemonData && pokemonData.sprites && pokemonData.sprites.other && pokemonData.sprites.other.dream_world.front_default"
@@ -35,6 +17,7 @@
 </template>
 <script>
     import Pokeball from '@/components/Pokeball.vue'
+    import InitialTransitionView from '@/views/InitialTransitionView.vue'
 
     export default {
         name: 'PokedexScreen',
@@ -42,10 +25,19 @@
             pokemonData: {
                 type: Object,
                 default: () => {}
+            },
+            loading: {
+                type: Boolean,
+                default: () => false
+            },
+            error: {
+                type: Boolean,
+                default: () => false
             }
         },
         components: {
             Pokeball,
+            "initial-transition" : InitialTransitionView
         },
         data(){
             return {
@@ -58,6 +50,8 @@
         methods: {},
         beforeCreate(){},
         created(){
+            console.log("loading", this.loading)
+            console.log("error", this.error)
             console.log("pokemonData", this.pokemonData)
         },
         beforeMount(){},
