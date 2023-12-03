@@ -53,7 +53,7 @@
             <img class="random-pokemon-img" :src="randomImagesPokemon[getIndexRandom(randomImagesPokemon)]" alt="pokemon"/>
             <p class="random-pokemon-name">Fig. {{ pokemon.name }}</p>
           </article>
-          <article style="width: 100%;">
+          <article>
             <p class="pokedex-type-text"><strong>Tipo:</strong></p>
             <img class="pokedex-type-img" v-for="type in pokemonTypes" :key="type.id" :src="type.img" :alt="type.value" />
           </article>
@@ -121,6 +121,11 @@
                                           <p><strong>Peso: </strong><span>${this.pokemon.weight} Kg</span></p>
                                           <p><strong>Experiencia: </strong><span>${this.pokemon.base_experience}</span></p>
                                           `
+              }
+            },
+            pokemon(newValue, oldValue){
+              if(newValue){
+                this.getSpeciesByPokemon(this.pokemon.forms[0].url)
               }
             }
         },

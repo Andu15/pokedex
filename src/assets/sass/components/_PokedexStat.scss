@@ -23,8 +23,16 @@
   -webkit-appearance: none;
   -moz-appearance: none;
   border: none;
-  color: darkred;
+  border-radius: 10px; 
+}
+.pokemon-stat-progress-bar::-webkit-progress-value {
+  background-color: map-get($map: $color-base, $key: another) /* Color naranja */
+  // border-radius: 10px;
+}
+.pokemon-stat-progress-bar::-moz-progress-bar {
+  background-color: #ff8c00; /* Color naranja para Firefox */
 }
 .pokemon-stat-base {
   // margin-left: 5px;
+  color: map-get($map: $color-base, $key: third)
 }
