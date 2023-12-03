@@ -1,0 +1,8 @@
+
+@import '@/assets/sass/utilities/variables.scss';
+
+#app {
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}

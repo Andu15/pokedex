@@ -3,7 +3,7 @@
     <template v-if="!isInitialCharge" >
       <initial-transition />
     </template>
-    <template v-else>
+    <template v-else >
       <router-view />
     </template>
   </div>

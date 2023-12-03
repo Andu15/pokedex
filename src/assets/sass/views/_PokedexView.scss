@@ -10,6 +10,7 @@
   // margin: 0 auto;
   overflow: initial;
   box-shadow: 0 2px 50px -2px map-get($color-base, main);
+  grid-column-start: 2;
 }
 .pokedex:hover .pokedex-right-front,
 .pokedex.is-active .pokedex-right-front {
