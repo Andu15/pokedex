@@ -5,23 +5,7 @@
 </template>
 <script>
     export default {
-        name: 'Pokeball',
-        props: {},
-        components: {},
-        data(){
-            return {}
-        },
-        computed: {},
-        watch: {},
-        methods: {},
-        beforeCreate(){},
-        created(){},
-        beforeMount(){},
-        mounted(){},
-        beforeUpdate(){},
-        updated(){},
-        beforeDestroy(){},
-        destroyed(){}
+        name: 'Pokeball'
     }
 </script>
 <style lang="scss" scoped>

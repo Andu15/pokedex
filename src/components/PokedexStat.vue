@@ -17,23 +17,7 @@
                 type: Object,
                 default: () => {}
             }
-        },
-        components: {},
-        data(){
-            return {
-            }
-        },
-        computed: {},
-        watch: {},
-        methods: {},
-        beforeCreate(){},
-        created(){},
-        beforeMount(){},
-        mounted(){},
-        beforeUpdate(){},
-        updated(){},
-        beforeDestroy(){},
-        destroyed(){}
+        }
     }
 </script>
 <style lang="scss">

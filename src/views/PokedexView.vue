@@ -211,13 +211,7 @@
             this.getPokemonById(),
             this.getRandomImgPokemon()
           ]);
-        },
-        beforeMount(){},
-        mounted(){},
-        beforeUpdate(){},
-        updated(){},
-        beforeDestroy(){},
-        destroyed(){}
+        }
     }
 </script>
 <style lang="scss" scoped>

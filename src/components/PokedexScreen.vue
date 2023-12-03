@@ -38,25 +38,7 @@
         components: {
             Pokeball,
             "initial-transition" : InitialTransitionView
-        },
-        data(){
-            return {
-                // error | loading | done | wait
-                // status: 'wait'
-            }
-        },
-        computed: {},
-        watch: {},
-        methods: {},
-        beforeCreate(){},
-        created(){},
-        beforeMount(){},
-        mounted(){},
-        beforeUpdate(){},
-        updated(){
-        },
-        beforeDestroy(){},
-        destroyed(){}
+        }
     }
 </script>
 <style lang="scss" scoped>
